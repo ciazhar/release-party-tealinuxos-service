@@ -1,6 +1,7 @@
 package com.ciazhar.releasepartyservice.controller;
 
 import com.ciazhar.releasepartyservice.model.Participant;
+import com.ciazhar.releasepartyservice.model.request.AttendForm;
 import com.ciazhar.releasepartyservice.model.request.PaymentForm;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
@@ -32,7 +33,7 @@ public class ParticipantController {
         return service.findAll();
     }
 
-    @PostMapping("/pay")
+    @GetMapping("/pay")
     public Mono<Participant> pay(@RequestParam String id){
         return service.pay(
             PaymentForm.builder().participantId(id).build()
@@ -42,5 +43,12 @@ public class ParticipantController {
     @GetMapping("/reminder")
     public Mono<Void> sendReminder(){
         return service.sendReminder();
+    }
+
+    @GetMapping("/attend")
+    public Mono<Participant> attend(@RequestParam String id){
+        return service.attend(
+            AttendForm.builder().participantId(id).build()
+        );
     }
 }
