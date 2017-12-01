@@ -6,12 +6,15 @@ import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.repository.ParticipantRepository;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
  * Created by ciazhar on 01/12/17.
  */
+
+@Service
 public class ParticipantServiceImpl implements ParticipantService {
 
     @Autowired private ParticipantRepository participantRepository;
