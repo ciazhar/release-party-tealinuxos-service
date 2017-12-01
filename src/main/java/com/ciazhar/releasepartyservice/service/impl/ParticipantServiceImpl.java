@@ -1,6 +1,7 @@
 package com.ciazhar.releasepartyservice.service.impl;
 
 import com.ciazhar.releasepartyservice.model.Participant;
+import com.ciazhar.releasepartyservice.model.request.AttendForm;
 import com.ciazhar.releasepartyservice.model.request.PaymentForm;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.repository.ParticipantRepository;
@@ -54,5 +55,19 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Override
     public Mono<Void> sendReminder() {
         return null;
+    }
+
+    @Override
+    public Mono<Participant> attend(AttendForm form) {
+        return participantRepository.findById(form.getParticipantId()).flatMap(
+            participant -> setAttendanceStatus(participant).flatMap(
+                participant1 -> participantRepository.save(participant1)
+            )
+        );
+    }
+
+    private Mono<Participant> setAttendanceStatus(Participant participant){
+        participant.setAttendanceStatus(true);
+        return Mono.just(participant);
     }
 }

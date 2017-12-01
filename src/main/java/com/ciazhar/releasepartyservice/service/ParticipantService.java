@@ -1,6 +1,7 @@
 package com.ciazhar.releasepartyservice.service;
 
 import com.ciazhar.releasepartyservice.model.Participant;
+import com.ciazhar.releasepartyservice.model.request.AttendForm;
 import com.ciazhar.releasepartyservice.model.request.PaymentForm;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import reactor.core.publisher.Flux;
@@ -14,4 +15,5 @@ public interface ParticipantService {
     Flux<Participant> findAll();
     Mono<Participant> pay(PaymentForm form);
     Mono<Void> sendReminder();
+    Mono<Participant> attend(AttendForm form);
 }
