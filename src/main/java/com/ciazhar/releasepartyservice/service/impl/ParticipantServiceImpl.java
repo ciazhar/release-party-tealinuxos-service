@@ -26,9 +26,11 @@ public class ParticipantServiceImpl implements ParticipantService {
             Participant.builder()
                 .name(form.getName())
                 .phoneNumber(form.getPhoneNumber())
-                .email(form.getPhoneNumber())
+                .email(form.getEmail())
                 .jobStatus(form.getStatus())
                 .dvdBitBit(form.getDvdBit())
+                .paymentStatus(false)
+                .attendanceStatus(false)
                 .build()
         );
     }
