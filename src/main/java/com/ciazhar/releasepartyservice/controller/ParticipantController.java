@@ -4,6 +4,7 @@ import com.ciazhar.releasepartyservice.model.Participant;
 import com.ciazhar.releasepartyservice.model.request.AttendForm;
 import com.ciazhar.releasepartyservice.model.request.PaymentForm;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
+import com.ciazhar.releasepartyservice.service.EmailService;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,11 @@ import javax.validation.Valid;
 public class ParticipantController {
 
     @Autowired private ParticipantService service;
+    @Autowired private EmailService emailService;
 
     @PostMapping("/register")
     public Mono<Participant> register(@RequestBody @Valid RegisterForm form){
+        emailService.sendEmail(form);
         return service.register(form);
     }
 
