@@ -1,3 +1,6 @@
+server:
+  port: 9999
+
 # Config Databases
 spring:
   data:
