@@ -1,6 +1,5 @@
 package com.ciazhar.releasepartyservice.service;
 
-import com.ciazhar.releasepartyservice.model.EmailStatus;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 
 /**
@@ -8,5 +7,5 @@ import com.ciazhar.releasepartyservice.model.request.RegisterForm;
  * [ Documentatiion Here ]
  */
 public interface EmailService {
-    EmailStatus sendEmail(RegisterForm form);
+    void sendEmail(RegisterForm form);
 }
