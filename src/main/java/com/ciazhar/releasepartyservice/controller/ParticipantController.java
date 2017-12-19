@@ -5,13 +5,22 @@ import com.ciazhar.releasepartyservice.model.request.AttendForm;
 import com.ciazhar.releasepartyservice.model.request.PaymentForm;
 import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.service.EmailService;
+import com.ciazhar.releasepartyservice.service.ImageService;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static org.springframework.http.CacheControl.maxAge;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.ResponseEntity.ok;
 
 /**
  * Created by ciazhar on 01/12/17.
@@ -22,13 +31,42 @@ import javax.validation.Valid;
 @RequestMapping("/api/participant")
 public class ParticipantController {
 
-    @Autowired private ParticipantService service;
-    @Autowired private EmailService emailService;
+    private final ParticipantService service;
+    private final EmailService emailService;
+    private final ImageService imageService;
+
+    @Autowired
+    public ParticipantController(ParticipantService service, EmailService emailService, ImageService imageService) {
+        this.service = service;
+        this.emailService = emailService;
+        this.imageService = imageService;
+    }
 
     @PostMapping("/register")
     public Mono<Participant> register(@RequestBody @Valid RegisterForm form){
         emailService.sendEmail(form);
         return service.register(form);
+    }
+
+    private static final long THIRTY_MINUTES = 1800000;
+
+    @GetMapping(produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getQRCode(@RequestParam String text){
+        try {
+            int QRCODE_WIDTH = 256;
+            int QRCODE_HEIGHT = 256;
+            return ok().cacheControl(maxAge(30, MINUTES))
+                    .body(imageService.generateQRCodeAsync(text, QRCODE_WIDTH, QRCODE_HEIGHT).get());
+        } catch (Exception e) {
+            throw new RuntimeException("Error while generating QR code images.",e);
+        }
+    }
+
+    @Scheduled(fixedRate = THIRTY_MINUTES)
+    @DeleteMapping()
+    @ResponseStatus(NO_CONTENT)
+    public void deleteAllCachedImage(){
+        imageService.purgeCache();
     }
 
     @GetMapping("/all")
