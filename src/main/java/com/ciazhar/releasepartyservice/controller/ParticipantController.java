@@ -7,6 +7,7 @@ import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.service.EmailService;
 import com.ciazhar.releasepartyservice.service.ImageService;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +44,10 @@ public class ParticipantController {
     }
 
     @PostMapping("/register")
-    public Mono<Participant> register(@RequestBody @Valid RegisterForm form){
-        emailService.sendEmail(form);
-        return service.register(form);
+    public Mono<Participant> register(@RequestBody @Valid RegisterForm form) throws JsonProcessingException {
+        Participant participant = service.register(form).block();
+        emailService.sendEmail(participant);
+        return Mono.just(participant);
     }
 
     private static final long THIRTY_MINUTES = 1800000;

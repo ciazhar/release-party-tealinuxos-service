@@ -18,11 +18,11 @@ li {
 	<h1>You've completed the Seminar & Release Party TeaLinuxOS Registration</h1>
 
 	<p>
-		Selamat <p th:text="'Dear '+ ${Content.username}+','">Name</p> anda telah sukses medaftar pada acara Seminar & Release Party TeaLinuxOS.
-		Gunakan QRCode Berikut untuk mendaftarkan diri saat registrasi ulang.
+		<p th:text="'Selamat '+ ${name}+','">Name</p> Anda telah sukses medaftar sebagai peserta pada acara Seminar & Release Party TeaLinuxOS.
+		Gunakan QRCode berikut saat akan melakukan registrasi ulang.
 	</p>
 	<div align="center">
-		<img th:src="@{http://103.246.107.213:9999/api/participant(text=${name})}">
+		<img th:src="@{http://103.246.107.213:9999/api/participant(text=${participant})}">
 	</div>
 	<div>
 		<p>Happy Open Source,</p>

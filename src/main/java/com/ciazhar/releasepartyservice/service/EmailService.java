@@ -1,11 +1,11 @@
 package com.ciazhar.releasepartyservice.service;
 
-import com.ciazhar.releasepartyservice.model.request.RegisterForm;
+import com.ciazhar.releasepartyservice.model.Participant;
 
 /**
  * Created by ciazhar on 02/12/17.
  * [ Documentatiion Here ]
  */
 public interface EmailService {
-    void sendEmail(RegisterForm form);
+    void sendEmail(Participant participant);
 }
