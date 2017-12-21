@@ -22,4 +22,5 @@ public class Participant {
     private DVDBit dvdBitBit;
     private Boolean paymentStatus;
     private Boolean attendanceStatus;
+    private String agendaId;
 }
