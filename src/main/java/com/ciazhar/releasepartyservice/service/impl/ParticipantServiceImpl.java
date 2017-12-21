@@ -21,7 +21,7 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Autowired private ParticipantRepository participantRepository;
 
     @Override
-    public Mono<Participant> register(RegisterForm form) {
+    public Mono<Participant> register(RegisterForm form, String agendaId) {
         return participantRepository.save(
             Participant.builder()
                 .name(form.getName())
@@ -31,6 +31,7 @@ public class ParticipantServiceImpl implements ParticipantService {
                 .dvdBitBit(form.getDvdBit())
                 .paymentStatus(false)
                 .attendanceStatus(false)
+                .agendaId(agendaId)
                 .build()
         );
     }

@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
  * Created by ciazhar on 01/12/17.
  */
 public interface ParticipantService {
-    Mono<Participant> register(RegisterForm form);
+    Mono<Participant> register(RegisterForm form, String agendaId);
     Flux<Participant> findAll();
     Mono<Participant> pay(PaymentForm form);
     Mono<Void> sendReminder();

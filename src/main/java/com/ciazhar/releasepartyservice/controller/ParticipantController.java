@@ -43,9 +43,9 @@ public class ParticipantController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/register")
-    public Mono<Participant> register(@RequestBody @Valid RegisterForm form) throws JsonProcessingException {
-        Participant participant = service.register(form).block();
+    @PostMapping("/{agendaId}/register")
+    public Mono<Participant> register(@RequestBody @Valid RegisterForm form,@PathVariable String agendaId){
+        Participant participant = service.register(form,agendaId).block();
         emailService.sendEmail(participant);
         return Mono.just(participant);
     }
@@ -75,7 +75,7 @@ public class ParticipantController {
     public Flux<Participant> findAll(){
         return service.findAll();
     }
-
+    
     @GetMapping("/pay")
     public Mono<Participant> pay(@RequestParam String id){
         return service.pay(
