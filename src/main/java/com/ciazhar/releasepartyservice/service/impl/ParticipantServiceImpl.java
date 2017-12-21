@@ -73,4 +73,9 @@ public class ParticipantServiceImpl implements ParticipantService {
         participant.setAttendanceStatus(true);
         return Mono.just(participant);
     }
+
+	@Override
+	public Flux<Participant> findByAgenda(String id) {
+		return participantRepository.findByAgendaId(id);
+	}
 }

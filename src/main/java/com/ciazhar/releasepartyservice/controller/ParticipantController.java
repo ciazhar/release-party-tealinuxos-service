@@ -74,6 +74,11 @@ public class ParticipantController {
     public Flux<Participant> findAll(){
         return service.findAll();
     }
+
+    @GetMapping("/{agendaId}/all")
+    public Flux<Participant> findByAgenda(@PathVariable String agendaId){
+        return service.findByAgenda(agendaId);
+    }
     
     @GetMapping("/pay")
     public Mono<Participant> pay(@RequestParam String id){

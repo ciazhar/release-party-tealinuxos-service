@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 public interface ParticipantService {
     Mono<Participant> register(RegisterForm form, String agendaId);
     Flux<Participant> findAll();
+    Flux<Participant> findByAgenda(String id);
     Mono<Participant> pay(PaymentForm form);
     Mono<Void> sendReminder();
     Mono<Participant> attend(AttendForm form);
