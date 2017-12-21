@@ -54,7 +54,6 @@ public class ParticipantServiceImpl implements ParticipantService {
         participant.setPaymentStatus(true);
         return Mono.just(participant);
     }
-
     @Override
     public Mono<Void> sendReminder() {
         return null;
@@ -67,6 +66,7 @@ public class ParticipantServiceImpl implements ParticipantService {
                 participant1 -> participantRepository.save(participant1)
             )
         );
+
     }
 
     private Mono<Participant> setAttendanceStatus(Participant participant){

@@ -1,11 +1,7 @@
 package com.ciazhar.releasepartyservice.service.impl;
 
-import com.ciazhar.releasepartyservice.model.MailBodyContent;
 import com.ciazhar.releasepartyservice.model.Participant;
-import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.service.EmailService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,8 +13,7 @@ import org.thymeleaf.context.Context;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  * Created by ciazhar on 02/12/17.
  * [ Documentatiion Here ]

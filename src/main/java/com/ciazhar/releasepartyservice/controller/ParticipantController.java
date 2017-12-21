@@ -7,7 +7,6 @@ import com.ciazhar.releasepartyservice.model.request.RegisterForm;
 import com.ciazhar.releasepartyservice.service.EmailService;
 import com.ciazhar.releasepartyservice.service.ImageService;
 import com.ciazhar.releasepartyservice.service.ParticipantService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
